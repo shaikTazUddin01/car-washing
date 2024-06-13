@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { TService } from "./service.interface";
+import { TService, TSlot } from "./service.interface";
 
 const ServiceSchema = new Schema<TService>(
   {
@@ -15,3 +15,27 @@ const ServiceSchema = new Schema<TService>(
 );
 
 export const Service = model<TService>("service", ServiceSchema);
+
+//slot schema
+const SlotSchema = new Schema<TSlot>(
+  {
+    service: { type: Schema.Types.ObjectId, required: true, ref: "service" },
+    date: { type: Date, required: true },
+    startTime: { type: String, required: true },
+    endTime: { type: String, required: true },
+    isBooked: {
+      type: String,
+      enum: {
+        values: ["available", "booked", "canceled"],
+        message: "{VALUE} is not supported",
+      },
+      required: true,
+      default: "available",
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+export const Slot = model<TSlot>("slot", SlotSchema);

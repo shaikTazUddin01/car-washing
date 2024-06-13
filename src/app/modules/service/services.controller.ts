@@ -3,7 +3,6 @@ import catchAsync from "../../utils/cathcAsync";
 import sendResponse from "../../utils/sendResponse";
 import { CarServiceServices } from "./service.service";
 
-
 //create service
 const createService = catchAsync(async (req, res) => {
   const result = await CarServiceServices.createServiceInToDB(req.body);
@@ -16,10 +15,8 @@ const createService = catchAsync(async (req, res) => {
   });
 });
 
-
 //get all service
 const getAllService = catchAsync(async (req, res) => {
-
   const result = await CarServiceServices.getAllServiceFromDB();
 
   sendResponse(res, {
@@ -32,7 +29,7 @@ const getAllService = catchAsync(async (req, res) => {
 
 //get single service
 const getSingleService = catchAsync(async (req, res) => {
-  const{id}=req.params
+  const { id } = req.params;
   const result = await CarServiceServices.getSingleServiceFromDB(id);
 
   sendResponse(res, {
@@ -44,8 +41,8 @@ const getSingleService = catchAsync(async (req, res) => {
 });
 //update service
 const updateService = catchAsync(async (req, res) => {
-  const {id}=req.params
-  const result = await CarServiceServices.updateServiceInToDB(id,req.body);
+  const { id } = req.params;
+  const result = await CarServiceServices.updateServiceInToDB(id, req.body);
 
   sendResponse(res, {
     success: true,
@@ -56,7 +53,7 @@ const updateService = catchAsync(async (req, res) => {
 });
 //soft delete service
 const deleteService = catchAsync(async (req, res) => {
-  const {id}=req.params
+  const { id } = req.params;
   const result = await CarServiceServices.DeleteServiceFromDB(id);
 
   sendResponse(res, {
@@ -66,10 +63,24 @@ const deleteService = catchAsync(async (req, res) => {
     data: result,
   });
 });
+//create slot
+const createSlot= catchAsync(async (req, res) => {
+  const result = await CarServiceServices.createSlotInToDB(req.body);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Slots created successfully",
+    data: result,
+  });
+});
+
 export const serviceController = {
   createService,
   getAllService,
   getSingleService,
   updateService,
-  deleteService
+  deleteService,
+  createSlot
+  
 };

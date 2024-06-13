@@ -1,5 +1,5 @@
-import { TService } from "./service.interface";
-import { Service } from "./service.model";
+import { TService, TSlot } from "./service.interface";
+import { Service, Slot } from "./service.model";
 
 //create service
 const createServiceInToDB = async (payload: TService) => {
@@ -41,10 +41,20 @@ const DeleteServiceFromDB = async (id: string) => {
   return result;
 };
 
+//create slot
+const createSlotInToDB = async (payload: TSlot) => {
+  const result = await Slot.create(payload);
+
+  return result;
+};
+
+
 export const CarServiceServices = {
   createServiceInToDB,
   getAllServiceFromDB,
   getSingleServiceFromDB,
   updateServiceInToDB,
   DeleteServiceFromDB,
+  createSlotInToDB
+
 };
