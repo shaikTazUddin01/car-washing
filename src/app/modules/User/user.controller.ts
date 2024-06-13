@@ -14,6 +14,7 @@ const signUpUser = catchAsync(async (req, res) => {
   });
 });
 const loginUser = catchAsync(async (req, res) => {
+  
   const result = await UserServices.loginUser(req.body);
 
   sendResponse(res, {
