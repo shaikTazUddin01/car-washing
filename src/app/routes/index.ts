@@ -2,24 +2,29 @@ import { Router } from "express";
 import { userRouter } from "../modules/User/user.router";
 import { serviceRouter } from "../modules/service/service.router";
 import { slotRouter } from "../modules/slot/slot.router";
+import { bookingRouter } from "../modules/booking/booking.router";
 
 const router = Router();
 
-const moduleRoutes = [
+const moduleRoutes =[
   {
     path: "/auth",
-    route: userRouter,
+    router: userRouter,
   },
   {
     path: "/services",
-    route: serviceRouter,
-  },,
+    router: serviceRouter,
+  },
   {
     path: "/slot",
-    route: slotRouter,
+    router: slotRouter,
+  },
+  {
+    path: "/bookings",
+    router: bookingRouter,
   }
-];
+]
 
-moduleRoutes.forEach((route) => router.use(route?.path, route?.route));
+moduleRoutes.forEach((route) => router.use(route.path, route.router));
 
 export default router;
