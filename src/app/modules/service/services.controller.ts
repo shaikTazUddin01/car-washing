@@ -4,6 +4,7 @@ import sendResponse from "../../utils/sendResponse";
 import { CarServiceServices } from "./service.service";
 
 
+//create service
 const createService = catchAsync(async (req, res) => {
   const result = await CarServiceServices.createServiceInToDB(req.body);
 
@@ -16,6 +17,7 @@ const createService = catchAsync(async (req, res) => {
 });
 
 
+//get all service
 const getAllService = catchAsync(async (req, res) => {
 
   const result = await CarServiceServices.getAllServiceFromDB();
@@ -28,7 +30,7 @@ const getAllService = catchAsync(async (req, res) => {
   });
 });
 
-
+//get single service
 const getSingleService = catchAsync(async (req, res) => {
   const{id}=req.params
   const result = await CarServiceServices.getSingleServiceFromDB(id);
@@ -40,10 +42,34 @@ const getSingleService = catchAsync(async (req, res) => {
     data: result,
   });
 });
+//update service
+const updateService = catchAsync(async (req, res) => {
+  const {id}=req.params
+  const result = await CarServiceServices.updateServiceInToDB(id,req.body);
 
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Service updated successfully",
+    data: result,
+  });
+});
+//soft delete service
+const deleteService = catchAsync(async (req, res) => {
+  const {id}=req.params
+  const result = await CarServiceServices.DeleteServiceFromDB(id);
 
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Service deleted successfully",
+    data: result,
+  });
+});
 export const serviceController = {
   createService,
   getAllService,
-  getSingleService
+  getSingleService,
+  updateService,
+  deleteService
 };
