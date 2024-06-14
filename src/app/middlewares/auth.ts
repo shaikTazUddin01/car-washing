@@ -7,17 +7,22 @@ import { Auth } from "../modules/Auth/auth.model";
 
 export const auth = (...requiredRole: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const token = req?.headers?.authorization;
+    let decoded = decodedData(req?.headers?.authorization as string);
+    // let token = req?.headers?.authorization;
 
-    if (!token) {
-      throw new Error("You are not authorizes.!");
-    }
+    // token = token?.split(" ")[1];
 
-    const decoded = jwt.verify(
-      token,
-      config.access_token_secret as string
-    ) as JwtPayload;
+    // console.log(token);
 
+    // if (!token) {
+    //   throw new Error("You are not authorizes.!");
+    // }
+
+    // const decoded = jwt.verify(
+    //   token,
+    //   config.access_token_secret as string
+    // ) as JwtPayload;
+    console.log(decoded);
     const { AuthId, email, role, iat } = decoded;
 
     const isUserExists = await Auth.findOne({
@@ -36,4 +41,23 @@ export const auth = (...requiredRole: TUserRole[]) => {
     // return decoded;
     next();
   });
+};
+
+export const decodedData = (header: string) => {
+  let token = header;
+
+  token = token?.split(" ")[1];
+
+  console.log(token);
+
+  if (!token) {
+    throw new Error("You are not authorizes.!");
+  }
+
+  const decoded = jwt.verify(
+    token,
+    config.access_token_secret as string
+  ) as JwtPayload;
+
+  return decoded;
 };

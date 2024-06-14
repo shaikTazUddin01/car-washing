@@ -4,7 +4,7 @@ import { TBooking } from "./booking.interface";
 
 const bookingSchema = new Schema<TBooking>(
   {
-    customer: { type: Schema.Types.ObjectId, required: true, ref: "user" },
+    customer: { type: Schema.Types.ObjectId, required: true, ref: "Auth" },
     service: { type: Schema.Types.ObjectId, required: true, ref: "service" },
     slot: { type: Schema.Types.ObjectId, required: true, ref: "slot" },
     vehicleType: {

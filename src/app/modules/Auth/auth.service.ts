@@ -1,4 +1,4 @@
-import { TAuth } from "./auth.interface";
+import { TAuth, TAuthLogin } from "./auth.interface";
 import { Auth } from "./auth.model";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { cteateToken } from "./auth.utils";
@@ -12,7 +12,7 @@ const signUpAuth = async (payload: TAuth) => {
 };
 
 // login Auth
-const loginAuth = async (payload: TAuth) => {
+const loginAuth = async (payload:TAuthLogin) => {
   const { email, password } = payload;
 
   const user = await Auth.findOne({ email: email });

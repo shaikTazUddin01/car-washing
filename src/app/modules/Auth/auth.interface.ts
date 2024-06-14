@@ -8,3 +8,7 @@ export type TAuth = {
   role: TUserRole;
   address: string;
 };
+export type TAuthLogin = {
+  email: string;
+  password: string;
+};

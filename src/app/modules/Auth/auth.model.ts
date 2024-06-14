@@ -4,16 +4,17 @@ import bcrypt from "bcrypt";
 import config from "../../config";
 const AuthSchema = new Schema<TAuth>(
   {
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    phone: { type: String, required: true },
+    name: { type: String, required: true, trim: true },
+    email: { type: String, required: true, unique: true, trim: true },
+    password: { type: String, required: true, trim: true },
+    phone: { type: String, required: true, trim: true },
     role: {
       type: String,
       enum: { values: ["Auth", "admin"], message: "{VALUE} is not supported" },
       required: true,
+      trim: true,
     },
-    address: { type: String, required: true },
+    address: { type: String, required: true, trim: true },
   },
   {
     timestamps: true,
@@ -37,3 +38,4 @@ AuthSchema.post("save", function (doc, next) {
 });
 
 export const Auth = model<TAuth>("Auth", AuthSchema);
+
