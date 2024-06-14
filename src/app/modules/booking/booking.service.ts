@@ -2,29 +2,48 @@ import { Auth } from "../Auth/auth.model";
 import { Service, Slot } from "../service/service.model";
 import { TBooking } from "./booking.interface";
 import { Booking } from "./booking.model";
+import { checkExists } from "./booking.utils";
 
 const createBookingInToDB = async (payload: TBooking, customerId: string) => {
-  const { customer, ...bookingDate } = payload;
+  const { customer, ...bookingData } = payload;
 
+  const keys = Object.keys(bookingData);
+  const firstKey = keys[0];
+  const secondKey = keys[1];
+
+  const service = (bookingData as any)[firstKey];
+  const slot = (bookingData as any)[secondKey];
+
+  const {
+    [firstKey]: firstValue,
+    [secondKey]: secondValue,
+    ...data
+  } = bookingData as any;
+
+  //check exists or not
   const isCustomerExists = await Auth.findOne({ _id: customerId });
   if (!isCustomerExists) {
     throw new Error("Please Login frist");
   }
-  const isServiceExists = await Service.findOne({ _id: payload?.service });
+  const isServiceExists = await Service.findOne({ _id: service });
   if (!isServiceExists) {
     throw new Error("This service is not Exists");
   }
-  const isSlotExists = await Slot.findOne({ _id: payload?.slot });
+  const isSlotExists = await Slot.findOne({ _id: slot });
   if (!isSlotExists) {
     throw new Error("This slot is not Exists");
   }
   if (isSlotExists?.isBooked !== "available") {
-    throw new Error(`This slot is Already ${isSlotExists?.isBooked} .Please Booked Another Slot`);
+    throw new Error(
+      `This slot is Already ${isSlotExists?.isBooked} .Please Booked Another Slot`
+    );
   }
 
   const createBooking = await Booking.create({
-    ...bookingDate,
+    ...data,
     customer: customerId,
+    service: service,
+    slot: slot,
   });
 
   const slotId = createBooking?.slot;

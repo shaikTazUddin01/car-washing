@@ -10,13 +10,13 @@ const createServiceInToDB = async (payload: TService) => {
 };
 //get all service
 const getAllServiceFromDB = async () => {
-  const result = await Service.find({isDeleted:'false'});
+  const result = await Service.find({ isDeleted: "false" });
 
   return result;
 };
 //get single service
 const getSingleServiceFromDB = async (id: string) => {
-  const result = await Service.findOne({_id:id , isDeleted:false});
+  const result = await Service.findOne({ _id: id, isDeleted: false });
 
   return result;
 };
@@ -45,6 +45,10 @@ const DeleteServiceFromDB = async (id: string) => {
 //create slot
 const createSlotInToDB = async (payload: TSlot) => {
   const { startTime, endTime, ...slotData } = payload;
+
+  
+
+
   //check service is exists or not
   const serviceInFo = await Service.findById(payload.service);
   const serviceDuration = serviceInFo?.duration;
