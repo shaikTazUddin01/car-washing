@@ -18,6 +18,9 @@ const createBookingInToDB = async (payload: TBooking, customerId: string) => {
   if (!isSlotExists) {
     throw new Error("This slot is not Exists");
   }
+  if (isSlotExists?.isBooked !== "available") {
+    throw new Error(`This slot is Already ${isSlotExists?.isBooked} .Please Booked Another Slot`);
+  }
 
   const createBooking = await Booking.create({
     ...bookingDate,

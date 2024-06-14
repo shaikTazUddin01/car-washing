@@ -10,13 +10,13 @@ const createServiceInToDB = async (payload: TService) => {
 };
 //get all service
 const getAllServiceFromDB = async () => {
-  const result = await Service.find();
+  const result = await Service.find({isDeleted:'false'});
 
   return result;
 };
 //get single service
 const getSingleServiceFromDB = async (id: string) => {
-  const result = await Service.findById(id);
+  const result = await Service.findOne({_id:id , isDeleted:false});
 
   return result;
 };

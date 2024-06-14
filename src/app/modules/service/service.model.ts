@@ -20,7 +20,7 @@ export const Service = model<TService>("service", ServiceSchema);
 const SlotSchema = new Schema<TSlot>(
   {
     service: { type: Schema.Types.ObjectId, required: true, ref: "service" },
-    date: { type: Date, required: true },
+    date: { type: String, required: true },
     startTime: { type: String, required: true },
     endTime: { type: String, required: true },
     isBooked: {
