@@ -5,7 +5,8 @@ import { slotService } from "./slot.service";
 
 //get all slot
 const getSlot = catchAsync(async (req, res) => {
-  const result = await slotService.getSlot();
+  
+  const result = await slotService.getSlot(req?.query);
 
   sendResponse(res, {
     success: true,

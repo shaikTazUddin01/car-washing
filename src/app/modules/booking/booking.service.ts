@@ -19,10 +19,34 @@ const createBookingInToDB = async (payload: TBooking, customerId: string) => {
     throw new Error("This slot is not Exists");
   }
 
-  const result = await Booking.create({
+  const createBooking = await Booking.create({
     ...bookingDate,
     customer: customerId,
   });
+
+  const slotId = createBooking?.slot;
+
+  await Slot.findByIdAndUpdate(
+    slotId,
+    { isBooked: "booked" },
+    {
+      new: true,
+    }
+  );
+
+  const result = await Booking.findById(createBooking?._id)
+    .populate({
+      path: "customer",
+      select: "_id name email phone address",
+    })
+    .populate({
+      path: "service",
+      select: "_id name description price duration isDeleted",
+    })
+    .populate({
+      path: "slot",
+      select: "_id service date startTime endTime isBooked",
+    });
 
   return result;
 };
@@ -38,21 +62,27 @@ const getBookingFromDB = async () => {
     .populate("slot");
   return result;
 };
-const getMyBookingFromDB = async (id : String) => {
+const getMyBookingFromDB = async (id: String) => {
   console.log("object");
 
-  const result = await Booking.find({customer:id})
+  const result = await Booking.find({ customer: id })
     .populate({
       path: "customer",
-      select: "-password",
+      select: "_id name email phone address",
     })
-    .populate("service")
-    .populate("slot");
+    .populate({
+      path: "service",
+      select: "_id name description price duration isDeleted",
+    })
+    .populate({
+      path: "slot",
+      select: "_id service date startTime endTime isBooked",
+    });
   return result;
 };
 
 export const bookingService = {
   createBookingInToDB,
   getBookingFromDB,
-  getMyBookingFromDB
+  getMyBookingFromDB,
 };

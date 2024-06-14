@@ -10,7 +10,7 @@ const AuthSchema = new Schema<TAuth>(
     phone: { type: String, required: true, trim: true },
     role: {
       type: String,
-      enum: { values: ["Auth", "admin"], message: "{VALUE} is not supported" },
+      enum: { values: ["user", "admin"], message: "{VALUE} is not supported" },
       required: true,
       trim: true,
     },
@@ -31,11 +31,19 @@ const AuthSchema = new Schema<TAuth>(
 //   next();
 // });
 
-AuthSchema.post("save", function (doc, next) {
-  doc.password = " ";
+// AuthSchema.post("save", function(doc,next) {
+//   // await Auth.findById(doc._id).select('-password')
+//    delete doc._doc.password
+//   next();
+// });
+  AuthSchema.set('toJSON', {
+    transform: function(doc, ret, options) {
+      delete ret?.password;
+      return ret;
+    }
+  });
+  
 
-  next();
-});
 
 export const Auth = model<TAuth>("Auth", AuthSchema);
 

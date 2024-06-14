@@ -69,7 +69,7 @@ const createSlotInToDB = async (payload: TSlot) => {
   for (let i = 0; i < timeSlot; i++) {
     const endTime =
       convartToNumber(numberToStartTime) + (serviceDuration as number);
-      
+
     const numberToendTime = convertToTime(endTime);
 
     result.push(

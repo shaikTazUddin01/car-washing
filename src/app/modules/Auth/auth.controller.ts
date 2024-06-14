@@ -4,12 +4,13 @@ import httpStatus from "http-status";
 import catchAsync from "../../utils/cathcAsync";
 
 const signUpAuth = catchAsync(async (req, res) => {
+  // const { password, ...signUpInfo } = req.body;
   const result = await AuthServices.signUpAuth(req.body);
 
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: "Auth registered successfully",
+    message: "User registered successfully",
     data: result,
   });
 });
