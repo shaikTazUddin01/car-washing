@@ -22,7 +22,7 @@ export const auth = (...requiredRole: TUserRole[]) => {
     //   token,
     //   config.access_token_secret as string
     // ) as JwtPayload;
-    console.log(decoded);
+    // console.log(decoded);
     const { AuthId, email, role, iat } = decoded;
 
     const isUserExists = await Auth.findOne({
@@ -48,7 +48,7 @@ export const decodedData = (header: string) => {
 
   token = token?.split(" ")[1];
 
-  console.log(token);
+  // console.log(token);
 
   if (!token) {
     throw new Error("You are not authorizes.!");

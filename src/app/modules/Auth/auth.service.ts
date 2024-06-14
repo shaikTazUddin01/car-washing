@@ -1,6 +1,6 @@
-import { TAuth, TAuthLogin } from "./auth.interface";
+import { TAuth, TAuthLogin, TJwtpayload } from "./auth.interface";
 import { Auth } from "./auth.model";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt, { Jwt, JwtPayload } from "jsonwebtoken";
 import { cteateToken } from "./auth.utils";
 import config from "../../config";
 // import bcrypt from "bcrypt";
@@ -12,7 +12,7 @@ const signUpAuth = async (payload: TAuth) => {
 };
 
 // login Auth
-const loginAuth = async (payload:TAuthLogin) => {
+const loginAuth = async (payload: TAuthLogin) => {
   const { email, password } = payload;
 
   const user = await Auth.findOne({ email: email });
@@ -26,15 +26,15 @@ const loginAuth = async (payload:TAuthLogin) => {
     throw new Error("You are not authorized");
   }
 
-  const jwtpayload = {
-    AuthId: user?._id,
+  const jwtpayload: TJwtpayload = {
+    AuthId: user?._id.toString(),
     email: user?.email,
     role: user?.role,
   };
   const token = cteateToken(
     jwtpayload,
-    config.access_token_secret,
-    config.access_token_expires_in
+    config.access_token_secret as string,
+    config.access_token_expires_in as string
   );
   // const decoded = jwt.verify(token, "shhhhh");
 

@@ -1,3 +1,5 @@
+import { Types } from "mongoose";
+
 export type TUserRole = "user" | "admin";
 
 export type TAuth = {
@@ -11,4 +13,9 @@ export type TAuth = {
 export type TAuthLogin = {
   email: string;
   password: string;
+};
+export type TJwtpayload = {
+  AuthId: string,
+  email: string,
+  role: TUserRole,
 };

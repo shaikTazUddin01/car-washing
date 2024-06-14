@@ -1,5 +1,6 @@
 import { TService, TSlot } from "./service.interface";
 import { Service, Slot } from "./service.model";
+import { createSolt, convartToNumber, convertToTime } from "./slot.utils";
 
 //create service
 const createServiceInToDB = async (payload: TService) => {
@@ -43,11 +44,47 @@ const DeleteServiceFromDB = async (id: string) => {
 
 //create slot
 const createSlotInToDB = async (payload: TSlot) => {
-  const result = await Slot.create(payload);
+  const { startTime, endTime, ...slotData } = payload;
+  //check service is exists or not
+  const serviceInFo = await Service.findById(payload.service);
+  const serviceDuration = serviceInFo?.duration;
+
+  if (!serviceInFo) {
+    throw new Error("This service is not Exists..!");
+  }
+  // time convertion process
+  const startTimeToNumber: number = convartToNumber(startTime);
+  const endTimeToNumber: number = convartToNumber(endTime);
+
+  const timeSlot = createSolt(
+    startTimeToNumber,
+    endTimeToNumber,
+    serviceDuration as number
+  );
+
+  let numberToStartTime = convertToTime(startTimeToNumber);
+
+  const result = [];
+
+  for (let i = 0; i < timeSlot; i++) {
+    const endTime =
+      convartToNumber(numberToStartTime) + (serviceDuration as number);
+      
+    const numberToendTime = convertToTime(endTime);
+
+    result.push(
+      await Slot.create({
+        ...slotData,
+        startTime: numberToStartTime,
+        endTime: numberToendTime,
+      })
+    );
+
+    numberToStartTime = numberToendTime;
+  }
 
   return result;
 };
-
 
 export const CarServiceServices = {
   createServiceInToDB,
@@ -55,6 +92,5 @@ export const CarServiceServices = {
   getSingleServiceFromDB,
   updateServiceInToDB,
   DeleteServiceFromDB,
-  createSlotInToDB
-
+  createSlotInToDB,
 };

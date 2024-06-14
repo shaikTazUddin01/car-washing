@@ -14,7 +14,7 @@ const {AuthId}=decodedData(req?.headers?.authorization as string)
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: "create booking successfully",
+    message: "Booking successful",
     data: result,
   });
 });
@@ -26,7 +26,7 @@ const getBooking = catchAsync(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: "booking retrieved successfully",
+    message: "All bookings retrieved successfully",
     data: result,
   });
 });
@@ -38,7 +38,7 @@ const getMyBooking = catchAsync(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: "booking retrieved successfully",
+    message: "User bookings retrieved successfully",
     data: result,
   });
 });
