@@ -56,11 +56,11 @@
 
      JWT_ACCESS_TOKEN_SECRET=jfkgkjfdioufdhjfgshuirturt8uiyhueruiourjeioteroehjkfgjkfghkjjk
      
-     JWT_ACCESS_EXPIRES_IN=10d
+     JWT_ACCESS_EXPIRES_IN=5d
      
      ```
-     Replace `username` and `password` with your MongoDB `username` and `password`.
-
+     Replace `username` and `password` with your MongoDB `username` and `password`. <br>
+    **`It's Just example create this veriable with your own imformation`**
 5. **Run the application:**
    - Open a terminal in the project directory and run the following command to start the project:
      ```

@@ -19,6 +19,12 @@ const config_1 = __importDefault(require("../../config"));
 // import bcrypt from "bcrypt";
 const signUpAuth = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     // payload.password=payload.password
+    // const email=payload?.email
+    // const isUserExists=await Auth.findOne({email})
+    // console.log(isUserExists);
+    // if (isUserExists) {
+    //   throw new Error("The User Already Exists. Please Sign up Anoher Email Account..!");
+    // }
     const user = yield auth_model_1.Auth.create(payload);
     return user;
 });
