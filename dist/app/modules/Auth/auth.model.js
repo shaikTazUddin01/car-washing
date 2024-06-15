@@ -9,7 +9,7 @@ const AuthSchema = new mongoose_1.Schema({
     phone: { type: String, required: true, trim: true },
     role: {
         type: String,
-        enum: { values: ["Auth", "admin"], message: "{VALUE} is not supported" },
+        enum: { values: ["user", "admin"], message: "{VALUE} is not supported" },
         required: true,
         trim: true,
     },
@@ -26,8 +26,15 @@ const AuthSchema = new mongoose_1.Schema({
 //   );
 //   next();
 // });
-AuthSchema.post("save", function (doc, next) {
-    doc.password = " ";
-    next();
+// AuthSchema.post("save", function(doc,next) {
+//   // await Auth.findById(doc._id).select('-password')
+//    delete doc._doc.password
+//   next();
+// });
+AuthSchema.set('toJSON', {
+    transform: function (doc, ret, options) {
+        ret === null || ret === void 0 ? true : delete ret.password;
+        return ret;
+    }
 });
 exports.Auth = (0, mongoose_1.model)("Auth", AuthSchema);

@@ -2,7 +2,7 @@ import { Auth } from "../Auth/auth.model";
 import { Service, Slot } from "../service/service.model";
 import { TBooking } from "./booking.interface";
 import { Booking } from "./booking.model";
-import { checkExists } from "./booking.utils";
+
 
 const createBookingInToDB = async (payload: TBooking, customerId: string) => {
   const { customer, ...bookingData } = payload;

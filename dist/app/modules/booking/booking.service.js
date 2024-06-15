@@ -25,20 +25,47 @@ const auth_model_1 = require("../Auth/auth.model");
 const service_model_1 = require("../service/service.model");
 const booking_model_1 = require("./booking.model");
 const createBookingInToDB = (payload, customerId) => __awaiter(void 0, void 0, void 0, function* () {
-    const { customer } = payload, bookingDate = __rest(payload, ["customer"]);
+    const { customer } = payload, bookingData = __rest(payload, ["customer"]);
+    const keys = Object.keys(bookingData);
+    const firstKey = keys[0];
+    const secondKey = keys[1];
+    const service = bookingData[firstKey];
+    const slot = bookingData[secondKey];
+    const _a = bookingData, _b = firstKey, firstValue = _a[_b], _c = secondKey, secondValue = _a[_c], data = __rest(_a, [typeof _b === "symbol" ? _b : _b + "", typeof _c === "symbol" ? _c : _c + ""]);
+    //check exists or not
     const isCustomerExists = yield auth_model_1.Auth.findOne({ _id: customerId });
     if (!isCustomerExists) {
         throw new Error("Please Login frist");
     }
-    const isServiceExists = yield service_model_1.Service.findOne({ _id: payload === null || payload === void 0 ? void 0 : payload.service });
+    const isServiceExists = yield service_model_1.Service.findOne({ _id: service });
     if (!isServiceExists) {
         throw new Error("This service is not Exists");
     }
-    const isSlotExists = yield service_model_1.Slot.findOne({ _id: payload === null || payload === void 0 ? void 0 : payload.slot });
+    const isSlotExists = yield service_model_1.Slot.findOne({ _id: slot });
     if (!isSlotExists) {
         throw new Error("This slot is not Exists");
     }
-    const result = yield booking_model_1.Booking.create(Object.assign(Object.assign({}, bookingDate), { customer: customerId }));
+    if ((isSlotExists === null || isSlotExists === void 0 ? void 0 : isSlotExists.isBooked) !== "available") {
+        throw new Error(`This slot is Already ${isSlotExists === null || isSlotExists === void 0 ? void 0 : isSlotExists.isBooked} .Please Booked Another Slot`);
+    }
+    const createBooking = yield booking_model_1.Booking.create(Object.assign(Object.assign({}, data), { customer: customerId, service: service, slot: slot }));
+    const slotId = createBooking === null || createBooking === void 0 ? void 0 : createBooking.slot;
+    yield service_model_1.Slot.findByIdAndUpdate(slotId, { isBooked: "booked" }, {
+        new: true,
+    });
+    const result = yield booking_model_1.Booking.findById(createBooking === null || createBooking === void 0 ? void 0 : createBooking._id)
+        .populate({
+        path: "customer",
+        select: "_id name email phone address",
+    })
+        .populate({
+        path: "service",
+        select: "_id name description price duration isDeleted",
+    })
+        .populate({
+        path: "slot",
+        select: "_id service date startTime endTime isBooked",
+    });
     return result;
 });
 const getBookingFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -57,14 +84,20 @@ const getMyBookingFromDB = (id) => __awaiter(void 0, void 0, void 0, function* (
     const result = yield booking_model_1.Booking.find({ customer: id })
         .populate({
         path: "customer",
-        select: "-password",
+        select: "_id name email phone address",
     })
-        .populate("service")
-        .populate("slot");
+        .populate({
+        path: "service",
+        select: "_id name description price duration isDeleted",
+    })
+        .populate({
+        path: "slot",
+        select: "_id service date startTime endTime isBooked",
+    });
     return result;
 });
 exports.bookingService = {
     createBookingInToDB,
     getBookingFromDB,
-    getMyBookingFromDB
+    getMyBookingFromDB,
 };

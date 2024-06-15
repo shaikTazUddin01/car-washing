@@ -15,7 +15,7 @@ exports.Service = (0, mongoose_1.model)("service", ServiceSchema);
 //slot schema
 const SlotSchema = new mongoose_1.Schema({
     service: { type: mongoose_1.Schema.Types.ObjectId, required: true, ref: "service" },
-    date: { type: Date, required: true },
+    date: { type: String, required: true },
     startTime: { type: String, required: true },
     endTime: { type: String, required: true },
     isBooked: {
