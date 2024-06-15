@@ -39,10 +39,20 @@ const auth = (...requiredRole) => {
             role,
         });
         if (!isUserExists) {
-            throw new Error("You are not authorized");
+            // throw new Error("You are not authorized");
+            res.json({
+                success: false,
+                statusCode: 401,
+                message: "You have no access to this route",
+            });
         }
         if (requiredRole && !requiredRole.includes(role)) {
-            throw new Error("you are not authorized");
+            res.json({
+                success: false,
+                statusCode: 401,
+                message: "You have no access to this route",
+            });
+            // throw new Error("you are not authorized");
         }
         // return decoded;
         next();
