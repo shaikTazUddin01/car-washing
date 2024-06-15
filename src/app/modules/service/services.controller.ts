@@ -19,19 +19,24 @@ const createService = catchAsync(async (req, res) => {
 const getAllService = catchAsync(async (req, res) => {
   const result = await CarServiceServices.getAllServiceFromDB();
 
+ console.log(result);
+
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
     message: "Service retrieved successfully",
     data: result,
   });
+
+
+
 });
 
 //get single service
 const getSingleService = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await CarServiceServices.getSingleServiceFromDB(id);
-
+console.log(result);
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
@@ -64,7 +69,7 @@ const deleteService = catchAsync(async (req, res) => {
   });
 });
 //create slot
-const createSlot= catchAsync(async (req, res) => {
+const createSlot = catchAsync(async (req, res) => {
   const result = await CarServiceServices.createSlotInToDB(req.body);
 
   sendResponse(res, {
@@ -81,6 +86,5 @@ export const serviceController = {
   getSingleService,
   updateService,
   deleteService,
-  createSlot
-  
+  createSlot,
 };

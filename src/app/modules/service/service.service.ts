@@ -46,9 +46,6 @@ const DeleteServiceFromDB = async (id: string) => {
 const createSlotInToDB = async (payload: TSlot) => {
   const { startTime, endTime, ...slotData } = payload;
 
-  
-
-
   //check service is exists or not
   const serviceInFo = await Service.findById(payload.service);
   const serviceDuration = serviceInFo?.duration;
