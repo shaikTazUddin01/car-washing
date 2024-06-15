@@ -7,23 +7,9 @@ import { Auth } from "../modules/Auth/auth.model";
 
 export const auth = (...requiredRole: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    let decoded = decodedData(req?.headers?.authorization as string);
-    // let token = req?.headers?.authorization;
-
-    // token = token?.split(" ")[1];
-
-    // console.log(token);
-
-    // if (!token) {
-    //   throw new Error("You are not authorizes.!");
-    // }
-
-    // const decoded = jwt.verify(
-    //   token,
-    //   config.access_token_secret as string
-    // ) as JwtPayload;
-    // console.log(decoded);
-    const { AuthId, email, role, iat } = decoded;
+    const decoded = decodedData(req?.headers?.authorization as string);
+   
+    const { AuthId, email, role } = decoded;
 
     const isUserExists = await Auth.findOne({
       _id: AuthId,

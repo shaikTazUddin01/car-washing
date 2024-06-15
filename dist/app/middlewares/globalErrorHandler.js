@@ -43,5 +43,6 @@ const globalErrorHandler = (err, req, res, next) => {
         errorSources,
         stack: err === null || err === void 0 ? void 0 : err.stack
     });
+    next();
 };
 exports.globalErrorHandler = globalErrorHandler;

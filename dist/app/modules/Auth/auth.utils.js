@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cteateToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+// import { Types } from "mongoose";
 const cteateToken = (jwtpayload, secret, expiresIn) => {
     return jsonwebtoken_1.default.sign(jwtpayload, secret, {
         expiresIn: expiresIn,

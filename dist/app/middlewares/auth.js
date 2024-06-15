@@ -20,19 +20,8 @@ const auth_model_1 = require("../modules/Auth/auth.model");
 const auth = (...requiredRole) => {
     return (0, cathcAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
-        let decoded = (0, exports.decodedData)((_a = req === null || req === void 0 ? void 0 : req.headers) === null || _a === void 0 ? void 0 : _a.authorization);
-        // let token = req?.headers?.authorization;
-        // token = token?.split(" ")[1];
-        // console.log(token);
-        // if (!token) {
-        //   throw new Error("You are not authorizes.!");
-        // }
-        // const decoded = jwt.verify(
-        //   token,
-        //   config.access_token_secret as string
-        // ) as JwtPayload;
-        // console.log(decoded);
-        const { AuthId, email, role, iat } = decoded;
+        const decoded = (0, exports.decodedData)((_a = req === null || req === void 0 ? void 0 : req.headers) === null || _a === void 0 ? void 0 : _a.authorization);
+        const { AuthId, email, role } = decoded;
         const isUserExists = yield auth_model_1.Auth.findOne({
             _id: AuthId,
             email,

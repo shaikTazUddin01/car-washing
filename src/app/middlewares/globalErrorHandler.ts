@@ -42,6 +42,7 @@ export const globalErrorHandler: ErrorRequestHandler = (err:any, req:Request, re
       errorSources,
       stack: err?.stack 
     });
+    next()
   };
   
 

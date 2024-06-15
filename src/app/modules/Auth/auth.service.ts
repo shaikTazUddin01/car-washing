@@ -1,12 +1,11 @@
 import { TAuth, TAuthLogin, TJwtpayload } from "./auth.interface";
 import { Auth } from "./auth.model";
-import jwt, { Jwt, JwtPayload } from "jsonwebtoken";
 import { cteateToken } from "./auth.utils";
 import config from "../../config";
 // import bcrypt from "bcrypt";
 
 const signUpAuth = async (payload: TAuth) => {
-  payload.password=payload.password
+  // payload.password=payload.password
   const user = await Auth.create(payload);
 
   return user;

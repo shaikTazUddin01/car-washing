@@ -10,7 +10,7 @@ const getSlot = async (query: Record<string, unknown>) => {
   if (query?.date) {
     filter["date"] = query.date;
   }
-console.log(filter);
+// console.log(filter);
   const result = await Slot.find(filter).populate("service");
   return result;
 };

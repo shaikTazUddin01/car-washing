@@ -45,7 +45,7 @@ const createBookingInToDB = (payload, customerId) => __awaiter(void 0, void 0, v
     if (!isSlotExists) {
         throw new Error("This slot is not Exists");
     }
-    if ((isSlotExists === null || isSlotExists === void 0 ? void 0 : isSlotExists.isBooked) !== "available") {
+    if ((isSlotExists === null || isSlotExists === void 0 ? void 0 : isSlotExists.isBooked) == "booked") {
         throw new Error(`This slot is Already ${isSlotExists === null || isSlotExists === void 0 ? void 0 : isSlotExists.isBooked} .Please Booked Another Slot`);
     }
     const createBooking = yield booking_model_1.Booking.create(Object.assign(Object.assign({}, data), { customer: customerId, service: service, slot: slot }));
@@ -69,7 +69,7 @@ const createBookingInToDB = (payload, customerId) => __awaiter(void 0, void 0, v
     return result;
 });
 const getBookingFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("object");
+    // console.log("object");
     const result = yield booking_model_1.Booking.find()
         .populate({
         path: "customer",
@@ -80,7 +80,7 @@ const getBookingFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
     return result;
 });
 const getMyBookingFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("object");
+    // console.log("object");
     const result = yield booking_model_1.Booking.find({ customer: id })
         .populate({
         path: "customer",

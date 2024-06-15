@@ -1,7 +1,5 @@
 import { Schema, model } from "mongoose";
 import { TAuth } from "./auth.interface";
-import bcrypt from "bcrypt";
-import config from "../../config";
 const AuthSchema = new Schema<TAuth>(
   {
     name: { type: String, required: true, trim: true },

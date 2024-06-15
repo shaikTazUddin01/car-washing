@@ -15,9 +15,9 @@ export const createSolt = (
 };
 
 export const convertToTime = (time: number) => {
-  var hours = time / 60;
-  var rhours = Math.floor(hours).toString().padStart(2,'0');
-  var minutes = (hours - parseInt(rhours)) * 60;
-  var rminutes = Math.round(minutes).toString().padStart(2,'0');
+  const hours = time / 60;
+  const rhours = Math.floor(hours).toString().padStart(2,'0');
+  const minutes = (hours - parseInt(rhours)) * 60;
+  const rminutes = Math.round(minutes).toString().padStart(2,'0');
   return rhours + ":" + rminutes;
 };

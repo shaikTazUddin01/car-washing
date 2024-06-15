@@ -19,7 +19,7 @@ const getSlot = (query) => __awaiter(void 0, void 0, void 0, function* () {
     if (query === null || query === void 0 ? void 0 : query.date) {
         filter["date"] = query.date;
     }
-    console.log(filter);
+    // console.log(filter);
     const result = yield service_model_1.Slot.find(filter).populate("service");
     return result;
 });

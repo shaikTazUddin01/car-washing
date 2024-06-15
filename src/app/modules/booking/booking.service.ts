@@ -3,7 +3,6 @@ import { Service, Slot } from "../service/service.model";
 import { TBooking } from "./booking.interface";
 import { Booking } from "./booking.model";
 
-
 const createBookingInToDB = async (payload: TBooking, customerId: string) => {
   const { customer, ...bookingData } = payload;
 
@@ -33,7 +32,7 @@ const createBookingInToDB = async (payload: TBooking, customerId: string) => {
   if (!isSlotExists) {
     throw new Error("This slot is not Exists");
   }
-  if (isSlotExists?.isBooked !== "available") {
+  if (isSlotExists?.isBooked == "booked") {
     throw new Error(
       `This slot is Already ${isSlotExists?.isBooked} .Please Booked Another Slot`
     );
@@ -73,7 +72,7 @@ const createBookingInToDB = async (payload: TBooking, customerId: string) => {
   return result;
 };
 const getBookingFromDB = async () => {
-  console.log("object");
+  // console.log("object");
 
   const result = await Booking.find()
     .populate({
@@ -84,8 +83,8 @@ const getBookingFromDB = async () => {
     .populate("slot");
   return result;
 };
-const getMyBookingFromDB = async (id: String) => {
-  console.log("object");
+const getMyBookingFromDB = async (id: string) => {
+  // console.log("object");
 
   const result = await Booking.find({ customer: id })
     .populate({
