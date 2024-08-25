@@ -1,4 +1,5 @@
-import { Slot } from "../service/service.model";
+import { Slot } from "./slot.model";
+
 
 const getSlot = async (query: Record<string, unknown>) => {
   const filter: any = {};
@@ -10,7 +11,7 @@ const getSlot = async (query: Record<string, unknown>) => {
   if (query?.date) {
     filter["date"] = query.date;
   }
-// console.log(filter);
+  // console.log(filter);
   const result = await Slot.find(filter).populate("service");
   return result;
 };
