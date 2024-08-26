@@ -5,6 +5,7 @@ import catchAsync from "../../utils/cathcAsync";
 
 const signUpAuth = catchAsync(async (req, res) => {
   // const { password, ...signUpInfo } = req.body;
+  console.log(req.body);
   const result = await AuthServices.signUpAuth(req.body);
 
   sendResponse(res, {

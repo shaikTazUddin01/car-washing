@@ -2,9 +2,11 @@ import { TAuth, TAuthLogin, TJwtpayload } from "./auth.interface";
 import { Auth } from "./auth.model";
 import { cteateToken } from "./auth.utils";
 import config from "../../config";
-// import bcrypt from "bcrypt";
+
+import bcrypt from "bcrypt";
 
 const signUpAuth = async (payload: TAuth) => {
+  payload.role = "user";
   const user = await Auth.create(payload);
 
   return user;
@@ -20,7 +22,10 @@ const loginAuth = async (payload: TAuthLogin) => {
   if (!isEmailMatch) {
     throw new Error("You are not authorized");
   }
-  const isPasswordMatch = user?.password === password;
+
+  const isPasswordMatch = await bcrypt.compare(password, user?.password);
+  // console.log("object-->", isPasswordMatch);
+  // const isPasswordMatch = user?.password === password;
   if (!isPasswordMatch) {
     throw new Error("You are not authorized");
   }
