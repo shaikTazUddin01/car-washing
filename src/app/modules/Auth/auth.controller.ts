@@ -29,7 +29,47 @@ const loginAuth = catchAsync(async (req, res) => {
   });
 });
 
+const getMyAccountInFo = catchAsync(async (req, res) => {
+  const {id}=req.params
+  const data= await AuthServices.getMyAccountInFo(id);
+
+  res.json({
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Retrieve My Account InFo",
+   
+    data: data,
+  });
+});
+const getUserFromDB = catchAsync(async (req, res) => {
+  
+  const data= await AuthServices.getUserFromDB();
+
+  res.json({
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "user retrieve success",
+   
+    data: data,
+  });
+});
+const updateMyAccountInFo = catchAsync(async (req, res) => {
+  const {id}=req.params
+  const data= await AuthServices.updateMyAccountInFo(id,req.body);
+
+  res.json({
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Profile updated",
+   
+    data: data,
+  });
+});
+
 export const AuthController = {
   signUpAuth,
   loginAuth,
+  getMyAccountInFo,
+  updateMyAccountInFo,
+  getUserFromDB
 };

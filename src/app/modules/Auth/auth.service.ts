@@ -49,8 +49,27 @@ const loginAuth = async (payload: TAuthLogin) => {
 
   return loginInfo;
 };
+// get my account info
+const getMyAccountInFo=async(id :string)=>{
+ const result =await Auth.findById(id);
+ return result;
+}
+// get account info
+const getUserFromDB=async()=>{
+ const result =await Auth.find();
+ return result;
+}
+// update my account info
+const updateMyAccountInFo=async(id :string,data:Partial<TAuth>)=>{
+ const result =await Auth.findByIdAndUpdate(id,data);
+ return result;
+}
 
 export const AuthServices = {
   signUpAuth,
   loginAuth,
+  getMyAccountInFo,
+  updateMyAccountInFo,
+  getUserFromDB
+
 };

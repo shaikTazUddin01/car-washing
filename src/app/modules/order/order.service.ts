@@ -28,7 +28,7 @@ const createOrder = async (data: TOrder) => {
 
   }
   const paymentSection = await initiatePayment(paymentData);
-  console.log(paymentSection);
+  // console.log(paymentSection);
   
   return paymentSection;
 };
