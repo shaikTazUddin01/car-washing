@@ -9,7 +9,7 @@ const createOrder = catchAsync(async (req, res) => {
 // const token =
 
 // console.log("id:",AuthId);
-console.log(req.body);
+// console.log(req.body);
   const result = await orderService.createOrder(req.body);
 
   sendResponse(res, {

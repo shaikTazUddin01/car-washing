@@ -1,10 +1,18 @@
 import { Types } from "mongoose";
 
+export type TCustomer={
+  customerName:string;
+  customerEmail:string;
+  customerPhone:string;
+  customerAddress:string
+}
  
 export type TOrder={
-    customer: Types.ObjectId;
+    customer:TCustomer
     service: Types.ObjectId;
     slot: Types.ObjectId;
-    paymentStatus:'payment clear'|'not payment';
+    paymentStatus:'pending'|'paid';
+    status:'pending'|'success'|'failed'
     paymentAmount:number;
+    transactionId:string;
 }
