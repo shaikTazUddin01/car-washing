@@ -9,7 +9,7 @@ const app = express();
 
 //api middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({origin:['http://localhost:5173'],credentials:true}));
 //create api route
 app.use("/api", router);
 //global error handle

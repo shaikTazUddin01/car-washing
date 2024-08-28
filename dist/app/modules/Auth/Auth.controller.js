@@ -19,6 +19,7 @@ const http_status_1 = __importDefault(require("http-status"));
 const cathcAsync_1 = __importDefault(require("../../utils/cathcAsync"));
 const signUpAuth = (0, cathcAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // const { password, ...signUpInfo } = req.body;
+    console.log(req.body);
     const result = yield auth_service_1.AuthServices.signUpAuth(req.body);
     (0, sendResponse_1.default)(res, {
         success: true,
@@ -33,8 +34,7 @@ const loginAuth = (0, cathcAsync_1.default)((req, res) => __awaiter(void 0, void
         success: true,
         statusCode: http_status_1.default.OK,
         message: "User logged in successfully",
-        token: data.token,
-        data: data.user,
+        data: { data: data.user, token: data.token },
     });
 }));
 exports.AuthController = {

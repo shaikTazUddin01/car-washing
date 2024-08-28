@@ -9,6 +9,7 @@ export const auth = (...requiredRole: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const decoded = decodedData(req?.headers?.authorization as string);
    
+    // console.log(decoded);
     const { AuthId, email, role } = decoded;
 
     const isUserExists = await Auth.findOne({

@@ -1,5 +1,6 @@
 import { Auth } from "../Auth/auth.model";
-import { Service, Slot } from "../service/service.model";
+import { Service } from "../service/service.model";
+import { Slot } from "../slot/slot.model";
 import { TBooking } from "./booking.interface";
 import { Booking } from "./booking.model";
 

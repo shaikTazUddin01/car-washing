@@ -16,15 +16,9 @@ exports.AuthServices = void 0;
 const auth_model_1 = require("./auth.model");
 const auth_utils_1 = require("./auth.utils");
 const config_1 = __importDefault(require("../../config"));
-// import bcrypt from "bcrypt";
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const signUpAuth = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    // payload.password=payload.password
-    // const email=payload?.email
-    // const isUserExists=await Auth.findOne({email})
-    // console.log(isUserExists);
-    // if (isUserExists) {
-    //   throw new Error("The User Already Exists. Please Sign up Anoher Email Account..!");
-    // }
+    payload.role = "user";
     const user = yield auth_model_1.Auth.create(payload);
     return user;
 });
@@ -36,7 +30,9 @@ const loginAuth = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     if (!isEmailMatch) {
         throw new Error("You are not authorized");
     }
-    const isPasswordMatch = (user === null || user === void 0 ? void 0 : user.password) === password;
+    const isPasswordMatch = yield bcrypt_1.default.compare(password, user === null || user === void 0 ? void 0 : user.password);
+    // console.log("object-->", isPasswordMatch);
+    // const isPasswordMatch = user?.password === password;
     if (!isPasswordMatch) {
         throw new Error("You are not authorized");
     }
@@ -48,7 +44,7 @@ const loginAuth = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const token = (0, auth_utils_1.cteateToken)(jwtpayload, config_1.default.access_token_secret, config_1.default.access_token_expires_in);
     // const decoded = jwt.verify(token, "shhhhh");
     const loginInfo = {
-        user,
+        user: jwtpayload,
         token,
     };
     return loginInfo;

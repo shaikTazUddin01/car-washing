@@ -43,7 +43,7 @@ const loginAuth = async (payload: TAuthLogin) => {
   // const decoded = jwt.verify(token, "shhhhh");
 
   const loginInfo = {
-    user,
+    user :jwtpayload,
     token,
   };
 

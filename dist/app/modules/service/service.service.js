@@ -21,10 +21,12 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CarServiceServices = void 0;
+const slot_model_1 = require("../slot/slot.model");
 const service_model_1 = require("./service.model");
 const slot_utils_1 = require("./slot.utils");
 //create service
 const createServiceInToDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    payload.isDeleted = false;
     const result = yield service_model_1.Service.create(payload);
     return result;
 });
@@ -70,7 +72,7 @@ const createSlotInToDB = (payload) => __awaiter(void 0, void 0, void 0, function
     for (let i = 0; i < timeSlot; i++) {
         const endTime = (0, slot_utils_1.convartToNumber)(numberToStartTime) + serviceDuration;
         const numberToendTime = (0, slot_utils_1.convertToTime)(endTime);
-        result.push(yield service_model_1.Slot.create(Object.assign(Object.assign({}, slotData), { startTime: numberToStartTime, endTime: numberToendTime })));
+        result.push(yield slot_model_1.Slot.create(Object.assign(Object.assign({}, slotData), { startTime: numberToStartTime, endTime: numberToendTime })));
         numberToStartTime = numberToendTime;
     }
     return result;

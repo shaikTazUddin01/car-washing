@@ -19,7 +19,9 @@ const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
 const slot_service_1 = require("./slot.service");
 //get all slot
 const getSlot = (0, cathcAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // console.log(req.query);
     const result = yield slot_service_1.slotService.getSlot(req === null || req === void 0 ? void 0 : req.query);
+    // console.log(result);
     (0, sendResponse_1.default)(res, {
         success: true,
         statusCode: http_status_1.default.OK,

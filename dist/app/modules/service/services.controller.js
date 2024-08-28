@@ -30,7 +30,7 @@ const createService = (0, cathcAsync_1.default)((req, res) => __awaiter(void 0, 
 //get all service
 const getAllService = (0, cathcAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield service_service_1.CarServiceServices.getAllServiceFromDB();
-    console.log(result);
+    //  console.log(result);
     (0, sendResponse_1.default)(res, {
         success: true,
         statusCode: http_status_1.default.OK,

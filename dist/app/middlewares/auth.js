@@ -21,6 +21,7 @@ const auth = (...requiredRole) => {
     return (0, cathcAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
         const decoded = (0, exports.decodedData)((_a = req === null || req === void 0 ? void 0 : req.headers) === null || _a === void 0 ? void 0 : _a.authorization);
+        // console.log(decoded);
         const { AuthId, email, role } = decoded;
         const isUserExists = yield auth_model_1.Auth.findOne({
             _id: AuthId,

@@ -19,7 +19,7 @@ const createService = catchAsync(async (req, res) => {
 const getAllService = catchAsync(async (req, res) => {
   const result = await CarServiceServices.getAllServiceFromDB();
 
- console.log(result);
+//  console.log(result);
 
   sendResponse(res, {
     success: true,

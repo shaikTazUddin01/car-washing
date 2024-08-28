@@ -9,6 +9,8 @@ const auth_controller_1 = require("./auth.controller");
 const validationRequest_1 = __importDefault(require("../../middlewares/validationRequest"));
 const auth_validation_1 = require("./auth.validation");
 const router = express_1.default.Router();
-router.post('/signup', (0, validationRequest_1.default)(auth_validation_1.AuthValidation.signUpValidationSchema), auth_controller_1.AuthController.signUpAuth);
+router.post('/signup', 
+// validateRequest(AuthValidation.signUpValidationSchema),
+auth_controller_1.AuthController.signUpAuth);
 router.post('/login', (0, validationRequest_1.default)(auth_validation_1.AuthValidation.logInValidationSchema), auth_controller_1.AuthController.loginAuth);
 exports.authRouter = router;

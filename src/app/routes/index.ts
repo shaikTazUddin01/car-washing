@@ -5,6 +5,7 @@ import { slotRouter } from "../modules/slot/slot.router";
 import { bookingRouter } from "../modules/booking/booking.router";
 import { authRouter } from "../modules/Auth/auth.router";
 import { myBookingRouter } from "../modules/booking/myBooking.router";
+import { orderRouter } from "../modules/order/order.router";
 
 const router = Router();
 
@@ -28,6 +29,10 @@ const moduleRoutes =[
   {
     path: "/my-bookings",
     router: myBookingRouter,
+  },
+  {
+    path: "/order",
+    router: orderRouter,
   }
 ]
 

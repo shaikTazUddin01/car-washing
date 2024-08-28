@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.slotService = void 0;
-const service_model_1 = require("../service/service.model");
+const slot_model_1 = require("./slot.model");
 const getSlot = (query) => __awaiter(void 0, void 0, void 0, function* () {
     const filter = {};
     if (query === null || query === void 0 ? void 0 : query.serviceId) {
@@ -20,7 +20,7 @@ const getSlot = (query) => __awaiter(void 0, void 0, void 0, function* () {
         filter["date"] = query.date;
     }
     // console.log(filter);
-    const result = yield service_model_1.Slot.find(filter).populate("service");
+    const result = yield slot_model_1.Slot.find(filter).populate("service");
     return result;
 });
 exports.slotService = {

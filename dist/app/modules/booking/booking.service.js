@@ -23,6 +23,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.bookingService = void 0;
 const auth_model_1 = require("../Auth/auth.model");
 const service_model_1 = require("../service/service.model");
+const slot_model_1 = require("../slot/slot.model");
 const booking_model_1 = require("./booking.model");
 const createBookingInToDB = (payload, customerId) => __awaiter(void 0, void 0, void 0, function* () {
     const { customer } = payload, bookingData = __rest(payload, ["customer"]);
@@ -41,7 +42,7 @@ const createBookingInToDB = (payload, customerId) => __awaiter(void 0, void 0, v
     if (!isServiceExists) {
         throw new Error("This service is not Exists");
     }
-    const isSlotExists = yield service_model_1.Slot.findOne({ _id: slot });
+    const isSlotExists = yield slot_model_1.Slot.findOne({ _id: slot });
     if (!isSlotExists) {
         throw new Error("This slot is not Exists");
     }
@@ -50,7 +51,7 @@ const createBookingInToDB = (payload, customerId) => __awaiter(void 0, void 0, v
     }
     const createBooking = yield booking_model_1.Booking.create(Object.assign(Object.assign({}, data), { customer: customerId, service: service, slot: slot }));
     const slotId = createBooking === null || createBooking === void 0 ? void 0 : createBooking.slot;
-    yield service_model_1.Slot.findByIdAndUpdate(slotId, { isBooked: "booked" }, {
+    yield slot_model_1.Slot.findByIdAndUpdate(slotId, { isBooked: "booked" }, {
         new: true,
     });
     const result = yield booking_model_1.Booking.findById(createBooking === null || createBooking === void 0 ? void 0 : createBooking._id)

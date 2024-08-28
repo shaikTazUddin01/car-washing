@@ -20,7 +20,7 @@ const signUpValidationSchema = zod_1.z.object({
             required_error: "Phone is required",
             invalid_type_error: "Phone must be a string",
         }),
-        role: zod_1.z.enum(["user", "admin"]),
+        // role: z.enum(["user", "admin"]),
         address: zod_1.z.string({
             required_error: "Address is required",
             invalid_type_error: "Address must be a string",

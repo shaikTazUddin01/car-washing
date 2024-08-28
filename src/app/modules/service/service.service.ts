@@ -1,9 +1,14 @@
-import { TService, TSlot } from "./service.interface";
-import { Service, Slot } from "./service.model";
+import { TSlot } from "../slot/slot.interface";
+import { Slot } from "../slot/slot.model";
+import { TService } from "./service.interface";
+import { Service } from "./service.model";
 import { createSolt, convartToNumber, convertToTime } from "./slot.utils";
 
 //create service
 const createServiceInToDB = async (payload: TService) => {
+
+  payload.isDeleted=false;
+
   const result = await Service.create(payload);
 
   return result;
