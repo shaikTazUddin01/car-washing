@@ -17,7 +17,9 @@ const createService = catchAsync(async (req, res) => {
 
 //get all service
 const getAllService = catchAsync(async (req, res) => {
-  const result = await CarServiceServices.getAllServiceFromDB();
+  const queries=req.query
+  
+  const result = await CarServiceServices.getAllServiceFromDB(queries);
 
 //  console.log(result);
 

@@ -3,6 +3,7 @@
 export type TUserRole = "user" | "admin";
 
 export type TAuth = {
+  image:string;
   name: string;
   email: string;
   password: string;

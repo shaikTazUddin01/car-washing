@@ -92,10 +92,7 @@ const getMyBookingFromDB = async (id: string) => {
       path: "customer",
       select: "_id name email phone address",
     })
-    .populate({
-      path: "service",
-      select: "_id name description price duration isDeleted",
-    })
+    .populate('service')
     .populate({
       path: "slot",
       select: "_id service date startTime endTime isBooked",

@@ -1,3 +1,4 @@
+import { TSlot } from "./slot.interface";
 import { Slot } from "./slot.model";
 
 
@@ -16,6 +17,15 @@ const getSlot = async (query: Record<string, unknown>) => {
   return result;
 };
 
+const updateSlot=async(id:string,data:Partial<TSlot>)=>{
+// console.log(id,data);
+// console.log(data);
+  const result =await Slot.findByIdAndUpdate(id,data);
+
+  return result
+}
+
 export const slotService = {
   getSlot,
+  updateSlot
 };

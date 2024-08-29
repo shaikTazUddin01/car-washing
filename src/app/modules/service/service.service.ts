@@ -14,8 +14,30 @@ const createServiceInToDB = async (payload: TService) => {
   return result;
 };
 //get all service
-const getAllServiceFromDB = async () => {
-  const result = await Service.find({ isDeleted: "false" });
+const getAllServiceFromDB = async (queries:any) => {
+let sortedProduct='-createdAt'
+  console.log(queries);
+const searchProduct:any={}
+if (queries && queries?.searchInfo) {
+  searchProduct.name={$regex:queries?.searchInfo,$options:'i'}
+}
+if (queries && queries?.sortByPrice) {
+  const sortByPrice=queries?.sortByPrice
+  if (sortByPrice=='dsc') {
+    sortedProduct="-price"
+  }
+  if (sortByPrice=='asc') {
+    sortedProduct="price"
+  }
+}
+ // Filter by price range
+ if (queries?.filterByPrice) {
+  const [minPrice, maxPrice] = queries.filterByPrice.split(' - ').map(Number);
+  searchProduct.price = { $gte: minPrice, $lte: maxPrice };
+}
+
+
+  const result = await Service.find({isDeleted: "false",...searchProduct}).sort(sortedProduct);
 
   return result;
 };

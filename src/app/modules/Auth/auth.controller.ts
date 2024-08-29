@@ -65,11 +65,24 @@ const updateMyAccountInFo = catchAsync(async (req, res) => {
     data: data,
   });
 });
+const updateUserRole = catchAsync(async (req, res) => {
+  const {id}=req.params
+  const data= await AuthServices.updateUserRole(id,req.body);
+
+  res.json({
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "user role updated",
+   
+    data: data,
+  });
+});
 
 export const AuthController = {
   signUpAuth,
   loginAuth,
   getMyAccountInFo,
   updateMyAccountInFo,
-  getUserFromDB
+  getUserFromDB,
+  updateUserRole
 };

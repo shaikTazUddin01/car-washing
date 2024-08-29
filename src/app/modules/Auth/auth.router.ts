@@ -23,7 +23,7 @@ router.get(
   AuthController.getMyAccountInFo
 );
 router.get(
-  "/user",
+  "/users",
   auth("admin"),
   AuthController.getUserFromDB
 );
@@ -31,6 +31,11 @@ router.put(
   "/myAccountInFo/:id",
   auth("user", "admin"),
   AuthController.updateMyAccountInFo
+);
+router.put(
+  "/userRole/:id",
+  auth("admin"),
+  AuthController.updateUserRole
 );
 
 export const authRouter = router;
