@@ -20,7 +20,7 @@ const {AuthId}=decodedData(req?.headers?.authorization as string)
 });
 
 const getBooking = catchAsync(async (req, res) => {
-  console.log('booking');
+  // console.log('booking');
   const result = await bookingService.getBookingFromDB();
 
   sendResponse(res, {

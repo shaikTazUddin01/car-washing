@@ -5,10 +5,10 @@ import { readFileSync } from "fs";
 const confirmationService = async (transactionId: string, status: string) => {
   const verifyResponse = await verifyPayment(transactionId);
   // console.log(verifyResponse);
-  let res;
+  // let res;
   let message = "";
   if (verifyResponse && verifyResponse.pay_status == "Successful") {
-    res = await order.findOneAndUpdate(
+     await order.findOneAndUpdate(
       { transactionId: transactionId },
       {
         paymentStatus: "paid",

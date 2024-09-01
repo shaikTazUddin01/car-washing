@@ -8,19 +8,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.paymentController = void 0;
-const cathcAsync_1 = __importDefault(require("../../utils/cathcAsync"));
-const payment_service_1 = require("./payment.service");
-const confirmationController = (0, cathcAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { transactionId, status } = req.query;
-    // console.log(transactionId);
-    const result = yield payment_service_1.paymentService.confirmationService(transactionId, status);
-    res.send(result);
-}));
-exports.paymentController = {
-    confirmationController,
+exports.reviewService = void 0;
+const review_model_1 = require("./review.model");
+const createReviewInFoDB = (data, id) => __awaiter(void 0, void 0, void 0, function* () {
+    const userReview = {
+        rating: data === null || data === void 0 ? void 0 : data.rating,
+        comment: data === null || data === void 0 ? void 0 : data.comment,
+        user: id,
+    };
+    const result = yield review_model_1.review.create(userReview);
+    return result;
+});
+const getAllReview = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield review_model_1.review.find().populate('user');
+    //   console.log(result);
+    return result;
+});
+exports.reviewService = {
+    createReviewInFoDB,
+    getAllReview
 };

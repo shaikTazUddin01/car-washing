@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { initiatePayment } from "../payment/payment.utils";
 import { TOrder } from "./order.initerface";
 import { order } from "./order.model";
@@ -15,6 +16,7 @@ const createOrder = async (data: TOrder) => {
     transactionId
   };
 
+  // eslint-disable-next-line no-unused-vars
   const result = await order.create(orderInfo);
   //  payment
   const paymentData={

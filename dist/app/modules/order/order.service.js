@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.orderService = void 0;
+/* eslint-disable @typescript-eslint/no-unused-vars */
 const payment_utils_1 = require("../payment/payment.utils");
 const order_model_1 = require("./order.model");
 const createOrder = (data) => __awaiter(void 0, void 0, void 0, function* () {
@@ -24,6 +25,7 @@ const createOrder = (data) => __awaiter(void 0, void 0, void 0, function* () {
         paymentAmount: data === null || data === void 0 ? void 0 : data.paymentAmount,
         transactionId
     };
+    // eslint-disable-next-line no-unused-vars
     const result = yield order_model_1.order.create(orderInfo);
     //  payment
     const paymentData = {

@@ -21,11 +21,14 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.bookingService = void 0;
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 const auth_model_1 = require("../Auth/auth.model");
 const service_model_1 = require("../service/service.model");
 const slot_model_1 = require("../slot/slot.model");
 const booking_model_1 = require("./booking.model");
 const createBookingInToDB = (payload, customerId) => __awaiter(void 0, void 0, void 0, function* () {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { customer } = payload, bookingData = __rest(payload, ["customer"]);
     const keys = Object.keys(bookingData);
     const firstKey = keys[0];

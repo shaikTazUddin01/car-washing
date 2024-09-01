@@ -36,6 +36,7 @@ export const auth = (...requiredRole: TUserRole[]) => {
       // throw new Error("you are not authorized");
     }
     // return decoded;
+    req.user=decoded
     next();
   });
 };

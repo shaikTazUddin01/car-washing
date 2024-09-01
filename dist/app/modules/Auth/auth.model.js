@@ -35,13 +35,13 @@ const AuthSchema = new mongoose_1.Schema({
 // middleware
 AuthSchema.pre("save", function (next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const Auth = this;
-        Auth.password = yield bcrypt_1.default.hash(Auth.password, Number(config_1.default.bcrypt_saltRounds));
+        // const Auth = this;
+        this.password = yield bcrypt_1.default.hash(this.password, Number(config_1.default.bcrypt_saltRounds));
         next();
     });
 });
 AuthSchema.set("toJSON", {
-    transform: function (doc, ret, options) {
+    transform: function (doc, ret) {
         ret === null || ret === void 0 ? true : delete ret.password;
         return ret;
     },

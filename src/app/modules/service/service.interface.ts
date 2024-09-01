@@ -1,4 +1,4 @@
-import { Types } from "mongoose";
+
 
 export type TService = {
   image: string;

@@ -17,10 +17,10 @@ const fs_1 = require("fs");
 const confirmationService = (transactionId, status) => __awaiter(void 0, void 0, void 0, function* () {
     const verifyResponse = yield (0, payment_utils_1.verifyPayment)(transactionId);
     // console.log(verifyResponse);
-    let res;
+    // let res;
     let message = "";
     if (verifyResponse && verifyResponse.pay_status == "Successful") {
-        res = yield order_model_1.order.findOneAndUpdate({ transactionId: transactionId }, {
+        yield order_model_1.order.findOneAndUpdate({ transactionId: transactionId }, {
             paymentStatus: "paid",
             status: status,
         });

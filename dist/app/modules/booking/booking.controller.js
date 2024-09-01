@@ -32,7 +32,7 @@ const createBooking = (0, cathcAsync_1.default)((req, res) => __awaiter(void 0, 
     });
 }));
 const getBooking = (0, cathcAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('booking');
+    // console.log('booking');
     const result = yield booking_service_1.bookingService.getBookingFromDB();
     (0, sendResponse_1.default)(res, {
         success: true,

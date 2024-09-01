@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import { Auth } from "../Auth/auth.model";
 import { Service } from "../service/service.model";
 import { Slot } from "../slot/slot.model";
@@ -5,6 +7,7 @@ import { TBooking } from "./booking.interface";
 import { Booking } from "./booking.model";
 
 const createBookingInToDB = async (payload: TBooking, customerId: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { customer, ...bookingData } = payload;
 
   const keys = Object.keys(bookingData);

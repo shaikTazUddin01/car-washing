@@ -3,7 +3,7 @@ import { paymentService } from "./payment.service";
 
 const confirmationController = catchAsync(async (req, res) => {
   const {transactionId,status} = req.query;
-  console.log(transactionId);
+  // console.log(transactionId);
  
 
   const result = await paymentService.confirmationService(

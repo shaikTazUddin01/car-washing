@@ -24,9 +24,10 @@ const AuthSchema = new Schema<TAuth>(
 
 // middleware
 AuthSchema.pre("save", async function (next) {
-  const Auth = this;
-  Auth.password = await bcrypt.hash(
-    Auth.password,
+  
+  // const Auth = this;
+  this.password = await bcrypt.hash(
+    this.password,
     Number(config.bcrypt_saltRounds)
   );
   next();
@@ -34,7 +35,7 @@ AuthSchema.pre("save", async function (next) {
 
 
 AuthSchema.set("toJSON", {
-  transform: function (doc, ret, options) {
+  transform: function (doc, ret) {
     delete ret?.password;
     return ret;
   },
