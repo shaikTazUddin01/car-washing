@@ -6,6 +6,8 @@ const slot_router_1 = require("../modules/slot/slot.router");
 const booking_router_1 = require("../modules/booking/booking.router");
 const auth_router_1 = require("../modules/Auth/auth.router");
 const myBooking_router_1 = require("../modules/booking/myBooking.router");
+const order_router_1 = require("../modules/order/order.router");
+const payment_route_1 = require("../modules/payment/payment.route");
 const router = (0, express_1.Router)();
 const moduleRoutes = [
     {
@@ -27,6 +29,14 @@ const moduleRoutes = [
     {
         path: "/my-bookings",
         router: myBooking_router_1.myBookingRouter,
+    },
+    {
+        path: "/order",
+        router: order_router_1.orderRouter,
+    },
+    {
+        path: "/payment",
+        router: payment_route_1.paymentRouter,
     }
 ];
 moduleRoutes.forEach((route) => router.use(route.path, route.router));

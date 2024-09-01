@@ -31,8 +31,28 @@ const createServiceInToDB = (payload) => __awaiter(void 0, void 0, void 0, funct
     return result;
 });
 //get all service
-const getAllServiceFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield service_model_1.Service.find({ isDeleted: "false" });
+const getAllServiceFromDB = (queries) => __awaiter(void 0, void 0, void 0, function* () {
+    let sortedProduct = "-createdAt";
+    // console.log(queries);
+    const searchProduct = {};
+    if (queries && (queries === null || queries === void 0 ? void 0 : queries.searchItem)) {
+        searchProduct.name = { $regex: queries === null || queries === void 0 ? void 0 : queries.searchItem, $options: "i" };
+    }
+    if (queries && (queries === null || queries === void 0 ? void 0 : queries.sortByPrice)) {
+        const sortByPrice = queries === null || queries === void 0 ? void 0 : queries.sortByPrice;
+        if (sortByPrice == "dsc") {
+            sortedProduct = "-price";
+        }
+        if (sortByPrice == "asc") {
+            sortedProduct = "price";
+        }
+    }
+    // Filter by price range
+    if (queries === null || queries === void 0 ? void 0 : queries.filterByPrice) {
+        const [minPrice, maxPrice] = queries.filterByPrice.split(" - ").map(Number);
+        searchProduct.price = { $gte: minPrice, $lte: maxPrice };
+    }
+    const result = yield service_model_1.Service.find(Object.assign({ isDeleted: "false" }, searchProduct)).sort(sortedProduct);
     return result;
 });
 //get single service

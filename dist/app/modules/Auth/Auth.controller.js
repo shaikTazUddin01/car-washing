@@ -37,7 +37,50 @@ const loginAuth = (0, cathcAsync_1.default)((req, res) => __awaiter(void 0, void
         data: { data: data.user, token: data.token },
     });
 }));
+const getMyAccountInFo = (0, cathcAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const data = yield auth_service_1.AuthServices.getMyAccountInFo(id);
+    res.json({
+        success: true,
+        statusCode: http_status_1.default.OK,
+        message: "Retrieve My Account InFo",
+        data: data,
+    });
+}));
+const getUserFromDB = (0, cathcAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = yield auth_service_1.AuthServices.getUserFromDB();
+    res.json({
+        success: true,
+        statusCode: http_status_1.default.OK,
+        message: "user retrieve success",
+        data: data,
+    });
+}));
+const updateMyAccountInFo = (0, cathcAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const data = yield auth_service_1.AuthServices.updateMyAccountInFo(id, req.body);
+    res.json({
+        success: true,
+        statusCode: http_status_1.default.OK,
+        message: "Profile updated",
+        data: data,
+    });
+}));
+const updateUserRole = (0, cathcAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const data = yield auth_service_1.AuthServices.updateUserRole(id, req.body);
+    res.json({
+        success: true,
+        statusCode: http_status_1.default.OK,
+        message: "user role updated",
+        data: data,
+    });
+}));
 exports.AuthController = {
     signUpAuth,
     loginAuth,
+    getMyAccountInFo,
+    updateMyAccountInFo,
+    getUserFromDB,
+    updateUserRole
 };

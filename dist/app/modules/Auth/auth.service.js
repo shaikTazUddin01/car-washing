@@ -49,7 +49,30 @@ const loginAuth = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     };
     return loginInfo;
 });
+// get my account info
+const getMyAccountInFo = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield auth_model_1.Auth.findById(id);
+    return result;
+});
+// get account info
+const getUserFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield auth_model_1.Auth.find();
+    return result;
+});
+// update my account info
+const updateMyAccountInFo = (id, data) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield auth_model_1.Auth.findByIdAndUpdate(id, data);
+    return result;
+});
+const updateUserRole = (id, data) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield auth_model_1.Auth.findByIdAndUpdate(id, data);
+    return result;
+});
 exports.AuthServices = {
     signUpAuth,
     loginAuth,
+    getMyAccountInFo,
+    updateMyAccountInFo,
+    getUserFromDB,
+    updateUserRole,
 };

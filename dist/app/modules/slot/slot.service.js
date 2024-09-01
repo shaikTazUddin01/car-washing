@@ -23,6 +23,13 @@ const getSlot = (query) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield slot_model_1.Slot.find(filter).populate("service");
     return result;
 });
+const updateSlot = (id, data) => __awaiter(void 0, void 0, void 0, function* () {
+    // console.log(id,data);
+    // console.log(data);
+    const result = yield slot_model_1.Slot.findByIdAndUpdate(id, data);
+    return result;
+});
 exports.slotService = {
     getSlot,
+    updateSlot
 };

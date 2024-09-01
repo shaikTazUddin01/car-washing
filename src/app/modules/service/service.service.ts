@@ -6,38 +6,39 @@ import { createSolt, convartToNumber, convertToTime } from "./slot.utils";
 
 //create service
 const createServiceInToDB = async (payload: TService) => {
-
-  payload.isDeleted=false;
+  payload.isDeleted = false;
 
   const result = await Service.create(payload);
 
   return result;
 };
 //get all service
-const getAllServiceFromDB = async (queries:any) => {
-let sortedProduct='-createdAt'
-  console.log(queries);
-const searchProduct:any={}
-if (queries && queries?.searchInfo) {
-  searchProduct.name={$regex:queries?.searchInfo,$options:'i'}
-}
-if (queries && queries?.sortByPrice) {
-  const sortByPrice=queries?.sortByPrice
-  if (sortByPrice=='dsc') {
-    sortedProduct="-price"
+const getAllServiceFromDB = async (queries: any) => {
+  let sortedProduct = "-createdAt";
+  // console.log(queries);
+  const searchProduct: any = {};
+  if (queries && queries?.searchItem) {
+    searchProduct.name = { $regex: queries?.searchItem, $options: "i" };
   }
-  if (sortByPrice=='asc') {
-    sortedProduct="price"
+  if (queries && queries?.sortByPrice) {
+    const sortByPrice = queries?.sortByPrice;
+    if (sortByPrice == "dsc") {
+      sortedProduct = "-price";
+    }
+    if (sortByPrice == "asc") {
+      sortedProduct = "price";
+    }
   }
-}
- // Filter by price range
- if (queries?.filterByPrice) {
-  const [minPrice, maxPrice] = queries.filterByPrice.split(' - ').map(Number);
-  searchProduct.price = { $gte: minPrice, $lte: maxPrice };
-}
+  // Filter by price range
+  if (queries?.filterByPrice) {
+    const [minPrice, maxPrice] = queries.filterByPrice.split(" - ").map(Number);
+    searchProduct.price = { $gte: minPrice, $lte: maxPrice };
+  }
 
-
-  const result = await Service.find({isDeleted: "false",...searchProduct}).sort(sortedProduct);
+  const result = await Service.find({
+    isDeleted: "false",
+    ...searchProduct,
+  }).sort(sortedProduct);
 
   return result;
 };
