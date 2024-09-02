@@ -6,10 +6,10 @@ const bookingSchema = new mongoose_1.Schema({
     customer: { type: mongoose_1.Schema.Types.ObjectId, required: true, ref: "Auth" },
     service: { type: mongoose_1.Schema.Types.ObjectId, required: true, ref: "service" },
     slot: { type: mongoose_1.Schema.Types.ObjectId, required: true, ref: "slot" },
-    paid: {
+    paymentStatus: {
         type: String,
         enum: {
-            values: ["paid", "pending"],
+            values: ['paid', 'pending'],
         },
         required: true,
     },

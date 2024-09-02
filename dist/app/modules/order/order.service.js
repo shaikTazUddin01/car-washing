@@ -11,12 +11,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.orderService = void 0;
 /* eslint-disable @typescript-eslint/no-unused-vars */
+// import { Booking } from "../booking/booking.model";
+const booking_model_1 = require("../booking/booking.model");
 const payment_utils_1 = require("../payment/payment.utils");
 const order_model_1 = require("./order.model");
 const createOrder = (data) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c, _d;
     const transactionId = `TXN-${Date.now()}`;
     const orderInfo = {
+        bookingId: data === null || data === void 0 ? void 0 : data.bookingId,
         customer: data === null || data === void 0 ? void 0 : data.customer,
         service: data === null || data === void 0 ? void 0 : data.service,
         slot: data === null || data === void 0 ? void 0 : data.slot,
@@ -25,6 +28,7 @@ const createOrder = (data) => __awaiter(void 0, void 0, void 0, function* () {
         paymentAmount: data === null || data === void 0 ? void 0 : data.paymentAmount,
         transactionId
     };
+    // console.log(orderInfo);
     // eslint-disable-next-line no-unused-vars
     const result = yield order_model_1.order.create(orderInfo);
     //  payment
@@ -38,6 +42,9 @@ const createOrder = (data) => __awaiter(void 0, void 0, void 0, function* () {
     };
     const paymentSection = yield (0, payment_utils_1.initiatePayment)(paymentData);
     // console.log(paymentSection);
+    if (paymentSection.result == true) {
+        yield booking_model_1.Booking.findByIdAndUpdate(data === null || data === void 0 ? void 0 : data.bookingId, { paymentStatus: "paid" });
+    }
     return paymentSection;
 });
 exports.orderService = {

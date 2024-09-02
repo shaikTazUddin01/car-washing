@@ -13,6 +13,7 @@ const OrderSchema = new Schema<TOrder>(
   {
     customer:{ type: customerSchema, required: true },
     service: { type: Schema.Types.ObjectId, required: true, ref: "service" },
+    bookingId: { type: Schema.Types.ObjectId, required: true, ref: "booking" },
     slot: { type: Schema.Types.ObjectId, required: true, ref: "slot" },
     paymentStatus: {
       type: String,

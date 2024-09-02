@@ -4,7 +4,7 @@
 
 ## Features
 
-1. **User Sing up system**
+1. **User Sign up system**
 2. **User log in system**
 3. **Create Service by Admin**
 4. **Retrieve All Service and Specific Service Also Update and Delete  Service**

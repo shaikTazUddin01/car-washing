@@ -52,11 +52,15 @@ const createBookingInToDB = (payload, customerId) => __awaiter(void 0, void 0, v
     if ((isSlotExists === null || isSlotExists === void 0 ? void 0 : isSlotExists.isBooked) == "booked") {
         throw new Error(`This slot is Already ${isSlotExists === null || isSlotExists === void 0 ? void 0 : isSlotExists.isBooked} .Please Booked Another Slot`);
     }
-    const createBooking = yield booking_model_1.Booking.create(Object.assign(Object.assign({}, data), { paid: 'pending', customer: customerId, service: service, slot: slot }));
-    const slotId = createBooking === null || createBooking === void 0 ? void 0 : createBooking.slot;
-    yield slot_model_1.Slot.findByIdAndUpdate(slotId, { isBooked: "booked" }, {
-        new: true,
-    });
+    const createBooking = yield booking_model_1.Booking.create(Object.assign(Object.assign({}, data), { paymentStatus: 'pending', customer: customerId, service: service, slot: slot }));
+    // const slotId = createBooking?.slot;
+    // await Slot.findByIdAndUpdate(
+    //   slotId,
+    //   { isBooked: "booked" },
+    //   {
+    //     new: true,
+    //   }
+    // );
     const result = yield booking_model_1.Booking.findById(createBooking === null || createBooking === void 0 ? void 0 : createBooking._id)
         .populate({
         path: "customer",

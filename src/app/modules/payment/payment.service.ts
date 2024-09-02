@@ -8,13 +8,15 @@ const confirmationService = async (transactionId: string, status: string) => {
   // let res;
   let message = "";
   if (verifyResponse && verifyResponse.pay_status == "Successful") {
-     await order.findOneAndUpdate(
+   const successOrder=  await order.findOneAndUpdate(
       { transactionId: transactionId },
       {
         paymentStatus: "paid",
         status: status,
       }
     );
+    console.log("object--->");
+    console.log(successOrder);
     message = "Successfully Paid!";
   } else {
     message = "Payment Failed!";

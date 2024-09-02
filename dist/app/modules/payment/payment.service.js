@@ -20,10 +20,12 @@ const confirmationService = (transactionId, status) => __awaiter(void 0, void 0,
     // let res;
     let message = "";
     if (verifyResponse && verifyResponse.pay_status == "Successful") {
-        yield order_model_1.order.findOneAndUpdate({ transactionId: transactionId }, {
+        const successOrder = yield order_model_1.order.findOneAndUpdate({ transactionId: transactionId }, {
             paymentStatus: "paid",
             status: status,
         });
+        console.log("object--->");
+        console.log(successOrder);
         message = "Successfully Paid!";
     }
     else {

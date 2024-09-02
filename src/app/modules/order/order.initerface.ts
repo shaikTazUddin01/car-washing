@@ -11,6 +11,7 @@ export type TOrder={
     customer:TCustomer;
     service: Types.ObjectId;
     slot: Types.ObjectId;
+    bookingId:Types.ObjectId;
     paymentStatus:'pending'|'paid';
     status:'pending'|'success'|'failed'
     paymentAmount:number;

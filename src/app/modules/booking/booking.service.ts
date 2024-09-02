@@ -44,21 +44,21 @@ const createBookingInToDB = async (payload: TBooking, customerId: string) => {
 
   const createBooking = await Booking.create({
     ...data,
-    paid:'pending',
+    paymentStatus:'pending',
     customer: customerId,
     service: service,
     slot: slot,
   });
 
-  const slotId = createBooking?.slot;
+  // const slotId = createBooking?.slot;
 
-  await Slot.findByIdAndUpdate(
-    slotId,
-    { isBooked: "booked" },
-    {
-      new: true,
-    }
-  );
+  // await Slot.findByIdAndUpdate(
+  //   slotId,
+  //   { isBooked: "booked" },
+  //   {
+  //     new: true,
+  //   }
+  // );
 
   const result = await Booking.findById(createBooking?._id)
     .populate({

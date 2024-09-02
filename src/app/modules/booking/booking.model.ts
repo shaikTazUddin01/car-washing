@@ -6,10 +6,10 @@ const bookingSchema = new Schema<TBooking>(
     customer: { type: Schema.Types.ObjectId, required: true, ref: "Auth" },
     service: { type: Schema.Types.ObjectId, required: true, ref: "service" },
     slot: { type: Schema.Types.ObjectId, required: true, ref: "slot" },
-    paid: {
+    paymentStatus: {
       type: String,
       enum: {
-        values: ["paid", "pending"],
+        values: ['paid','pending'],
       },
       required: true,
     },

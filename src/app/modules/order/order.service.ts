@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+// import { Booking } from "../booking/booking.model";
+import { Booking } from "../booking/booking.model";
 import { initiatePayment } from "../payment/payment.utils";
 import { TOrder } from "./order.initerface";
 import { order } from "./order.model";
@@ -7,6 +9,7 @@ const createOrder = async (data: TOrder) => {
   const transactionId = `TXN-${Date.now()}`;
 
   const orderInfo = {
+    bookingId:data?.bookingId,
     customer:data?.customer,
     service: data?.service,
     slot: data?.slot,
@@ -15,6 +18,7 @@ const createOrder = async (data: TOrder) => {
     paymentAmount: data?.paymentAmount,
     transactionId
   };
+  // console.log(orderInfo);
 
   // eslint-disable-next-line no-unused-vars
   const result = await order.create(orderInfo);
@@ -29,9 +33,13 @@ const createOrder = async (data: TOrder) => {
 
 
   }
+ 
+
   const paymentSection = await initiatePayment(paymentData);
   // console.log(paymentSection);
-  
+  if(paymentSection.result==true){
+ await Booking.findByIdAndUpdate(data?.bookingId,{paymentStatus:"paid"})
+  }
   return paymentSection;
 };
 

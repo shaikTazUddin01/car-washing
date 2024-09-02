@@ -11,6 +11,7 @@ const customerSchema = new mongoose_1.Schema({
 const OrderSchema = new mongoose_1.Schema({
     customer: { type: customerSchema, required: true },
     service: { type: mongoose_1.Schema.Types.ObjectId, required: true, ref: "service" },
+    bookingId: { type: mongoose_1.Schema.Types.ObjectId, required: true, ref: "booking" },
     slot: { type: mongoose_1.Schema.Types.ObjectId, required: true, ref: "slot" },
     paymentStatus: {
         type: String,
