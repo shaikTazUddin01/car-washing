@@ -12,8 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.paymentService = void 0;
 const order_model_1 = require("../order/order.model");
 const payment_utils_1 = require("./payment.utils");
-const path_1 = require("path");
-const fs_1 = require("fs");
+// import { join } from "path";
+// import { readFileSync } from "fs";
 const confirmationService = (transactionId, status) => __awaiter(void 0, void 0, void 0, function* () {
     const verifyResponse = yield (0, payment_utils_1.verifyPayment)(transactionId);
     // console.log(verifyResponse);
@@ -29,10 +29,10 @@ const confirmationService = (transactionId, status) => __awaiter(void 0, void 0,
     else {
         message = "Payment Failed!";
     }
-    const filePath = (0, path_1.join)(__dirname, "../../views/confirmation.html");
-    let template = (0, fs_1.readFileSync)(filePath, "utf-8");
-    template = template.replace("{{message}}", message);
-    return template;
+    // const filePath = join(__dirname, "../../views/confirmation.html");
+    // let template = readFileSync(filePath, "utf-8");
+    // template = template.replace("{{message}}", message);
+    return message;
 });
 exports.paymentService = {
     confirmationService,

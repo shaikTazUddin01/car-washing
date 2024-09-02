@@ -8,7 +8,7 @@ export type TCustomer={
 }
  
 export type TOrder={
-    customer:TCustomer
+    customer:TCustomer;
     service: Types.ObjectId;
     slot: Types.ObjectId;
     paymentStatus:'pending'|'paid';

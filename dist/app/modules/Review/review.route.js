@@ -6,5 +6,5 @@ const auth_1 = require("../../middlewares/auth");
 const review_controller_1 = require("./review.controller");
 const router = (0, express_1.Router)();
 router.post("/create", (0, auth_1.auth)("user"), review_controller_1.reviewController.createReview);
-router.get("/allReviews", (0, auth_1.auth)("user", "admin"), review_controller_1.reviewController.getAllReview);
+router.get("/allReviews", review_controller_1.reviewController.getAllReview);
 exports.reviewRouter = router;

@@ -7,9 +7,9 @@ export const initiatePayment = async (paymentData:Record<string,any>) => {
         store_id: config.store_id,
         signature_key: config.signature_key,
         tran_id: paymentData?.transactionId,
-        success_url: `http://localhost:5000/api/payment/confirmation?transactionId=${paymentData?.transactionId}&status=success`,
-        fail_url: `http://localhost:5000/api/payment/confirmation?status=failed`,
-        cancel_url: "http://localhost:5173/booking",
+        success_url: `https://new-car-washing.vercel.app/api/payment/confirmation?transactionId=${paymentData?.transactionId}&status=success`,
+        fail_url: `https://new-car-washing.vercel.app/api/payment/confirmation?status=failed`,
+        cancel_url: "https://carwashing-service.netlify.app/booking",
         amount: paymentData?.paymentAmount,
         currency: "BDT",
         desc: "Merchant Registration Payment",
@@ -49,3 +49,5 @@ try {
     
 }
 }
+
+// https://new-car-washing.vercel.app/api/payment/confirmation?transactionId=${paymentData?.transactionId}&status=success

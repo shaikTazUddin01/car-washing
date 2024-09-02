@@ -21,9 +21,9 @@ const initiatePayment = (paymentData) => __awaiter(void 0, void 0, void 0, funct
             store_id: config_1.default.store_id,
             signature_key: config_1.default.signature_key,
             tran_id: paymentData === null || paymentData === void 0 ? void 0 : paymentData.transactionId,
-            success_url: `http://localhost:5000/api/payment/confirmation?transactionId=${paymentData === null || paymentData === void 0 ? void 0 : paymentData.transactionId}&status=success`,
-            fail_url: `http://localhost:5000/api/payment/confirmation?status=failed`,
-            cancel_url: "http://localhost:5173/booking",
+            success_url: `https://new-car-washing.vercel.app/api/payment/confirmation?transactionId=${paymentData === null || paymentData === void 0 ? void 0 : paymentData.transactionId}&status=success`,
+            fail_url: `https://new-car-washing.vercel.app/api/payment/confirmation?status=failed`,
+            cancel_url: "https://carwashing-service.netlify.app/booking",
             amount: paymentData === null || paymentData === void 0 ? void 0 : paymentData.paymentAmount,
             currency: "BDT",
             desc: "Merchant Registration Payment",
@@ -62,3 +62,4 @@ const verifyPayment = (transactionId) => __awaiter(void 0, void 0, void 0, funct
     }
 });
 exports.verifyPayment = verifyPayment;
+// https://new-car-washing.vercel.app/api/payment/confirmation?transactionId=${paymentData?.transactionId}&status=success

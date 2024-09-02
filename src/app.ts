@@ -9,7 +9,7 @@ const app = express();
 
 //api middleware
 app.use(express.json());
-app.use(cors({origin:['http://localhost:5173'],credentials:true}));
+app.use(cors({origin:['http://localhost:5173','https://carwashing-service.netlify.app'],credentials:true}));
 //create api route
 app.use("/api", router);
 //global error handle

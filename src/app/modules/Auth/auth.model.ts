@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 import { Schema, model } from "mongoose";
 import { TAuth } from "./auth.interface";
 import config from "../../config";
@@ -25,9 +26,9 @@ const AuthSchema = new Schema<TAuth>(
 // middleware
 AuthSchema.pre("save", async function (next) {
   
-  // const Auth = this;
-  this.password = await bcrypt.hash(
-    this.password,
+  const Auth = this;
+  Auth.password = await bcrypt.hash(
+    Auth.password,
     Number(config.bcrypt_saltRounds)
   );
   next();

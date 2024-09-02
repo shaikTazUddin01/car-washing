@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Auth = void 0;
+/* eslint-disable @typescript-eslint/no-this-alias */
 const mongoose_1 = require("mongoose");
 const config_1 = __importDefault(require("../../config"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
@@ -35,8 +36,8 @@ const AuthSchema = new mongoose_1.Schema({
 // middleware
 AuthSchema.pre("save", function (next) {
     return __awaiter(this, void 0, void 0, function* () {
-        // const Auth = this;
-        this.password = yield bcrypt_1.default.hash(this.password, Number(config_1.default.bcrypt_saltRounds));
+        const Auth = this;
+        Auth.password = yield bcrypt_1.default.hash(Auth.password, Number(config_1.default.bcrypt_saltRounds));
         next();
     });
 });

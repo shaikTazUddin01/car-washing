@@ -5,6 +5,7 @@ export type TBooking={
     customer: Types.ObjectId;
     service: Types.ObjectId;
     slot: Types.ObjectId;
+    paid:'paid'|'pending'
     // vehicleType: 'car' | 'truck' | 'SUV' | 'van' | 'motorcycle' | 'bus' | 'electricVehicle' | 'hybridVehicle' | 'bicycle' | 'tractor';
     // vehicleBrand: string;
     // vehicleModel: string;

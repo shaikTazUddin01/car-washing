@@ -1,6 +1,6 @@
 # <center>Assignment - 03</center>
- **Project Name : car-washing-system** <br>
- **Live Link : [https://car-washing.vercel.app](https://car-washing.vercel.app/)** 
+ **Project Name : Car Washing Booking System** <br>
+ **Live Link : [https://new-car-washing.vercel.app](https://new-car-washing.vercel.app/)** 
 
 ## Features
 
@@ -14,6 +14,7 @@
 8. **Get All Bookings Only Accessible by Admin**
 9. **Get User's to his Bookings Slot**
 10. **Handle Different Type Error**
+11. **Added Aamerpay payment getway**
 
 
 ## Technology Used

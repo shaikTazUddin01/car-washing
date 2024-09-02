@@ -44,6 +44,7 @@ const createBookingInToDB = async (payload: TBooking, customerId: string) => {
 
   const createBooking = await Booking.create({
     ...data,
+    paid:'pending',
     customer: customerId,
     service: service,
     slot: slot,

@@ -1,7 +1,7 @@
 import { order } from "../order/order.model";
 import { verifyPayment } from "./payment.utils";
-import { join } from "path";
-import { readFileSync } from "fs";
+// import { join } from "path";
+// import { readFileSync } from "fs";
 const confirmationService = async (transactionId: string, status: string) => {
   const verifyResponse = await verifyPayment(transactionId);
   // console.log(verifyResponse);
@@ -19,12 +19,12 @@ const confirmationService = async (transactionId: string, status: string) => {
   } else {
     message = "Payment Failed!";
   }
-  const filePath = join(__dirname, "../../views/confirmation.html");
-  let template = readFileSync(filePath, "utf-8");
+  // const filePath = join(__dirname, "../../views/confirmation.html");
+  // let template = readFileSync(filePath, "utf-8");
 
-  template = template.replace("{{message}}", message);
+  // template = template.replace("{{message}}", message);
 
-  return template;
+  return message;
 };
 
 export const paymentService = {
