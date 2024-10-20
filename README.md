@@ -1,6 +1,6 @@
-# <center>Assignment - 03</center>
- **Project Name : Car Washing Booking System** <br>
- **Live Link : [https://new-car-washing.vercel.app](https://new-car-washing.vercel.app/)** 
+# Project Name : Car Washing Booking System Server
+
+**Live Link : [https://new-car-washing.vercel.app](https://new-car-washing.vercel.app/)** 
 
 ## Features
 
