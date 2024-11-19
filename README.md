@@ -1,4 +1,4 @@
-# Project Name : Car Washing Booking System Server
+# Project Name : Online Booking System
 
 **Live Link (Backend): [https://new-car-washing.vercel.app](https://new-car-washing.vercel.app/)** </br>
 **Live Link(Frontend) : [https://carwashing-service.netlify.app](https://carwashing-service.netlify.app)** 
